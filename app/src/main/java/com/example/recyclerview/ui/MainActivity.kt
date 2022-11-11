@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
+import androidx.recyclerview.selection.OnDragInitiatedListener
 import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
@@ -40,13 +41,13 @@ class MainActivity : AppCompatActivity(), ActionMode.Callback {
         adapter = MovieAdapter(Supplier.Movies)
         binding.recyclerView.adapter = adapter
 
-        //RecyclerView Selection Based Library
+        //RecyclerView Multi Selection API
         tracker = SelectionTracker.Builder(
             "selectionItem",
             binding.recyclerView,
             ItemsKeyProvider(adapter),
             ItemsDetailsLookup(binding.recyclerView),
-            StorageStrategy.createStringStorage()
+            StorageStrategy.createStringStorage(),
         ).withSelectionPredicate(
             SelectionPredicates.createSelectAnything()
         ).build()
@@ -97,6 +98,10 @@ class MainActivity : AppCompatActivity(), ActionMode.Callback {
     }
 
 
+    /**
+     * This is action mode methods that can be utilize
+     * for the actionbar and toolbar.
+     */
     override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
         mode?.menuInflater?.inflate(R.menu.menu_item, menu)
         return true
