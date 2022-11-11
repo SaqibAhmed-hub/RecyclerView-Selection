@@ -1,7 +1,6 @@
 package com.example.recyclerview.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -14,10 +13,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.R
-import com.example.recyclerview.adapter.MovieAdapter
 import com.example.recyclerview.Supplier
 import com.example.recyclerview.adapter.ItemsDetailsLookup
 import com.example.recyclerview.adapter.ItemsKeyProvider
+import com.example.recyclerview.adapter.MovieAdapter
 import com.example.recyclerview.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), ActionMode.Callback {
@@ -89,9 +88,11 @@ class MainActivity : AppCompatActivity(), ActionMode.Callback {
         return when(item?.itemId){
             R.id.menu_delete -> {
                 //write the logic here to remove
-                val selected = adapter.movieList.filter {
+                val selected = adapter.movieList.filterNot {
                     tracker.selection.contains(it.title)
                 }.toMutableList()
+                adapter.movieList = selected
+                adapter.notifyDataSetChanged()
                 actionMode?.finish()
                 true
             }

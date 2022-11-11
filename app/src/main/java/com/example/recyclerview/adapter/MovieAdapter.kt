@@ -15,7 +15,7 @@ import com.example.recyclerview.databinding.AdapterLayoutBinding
 class MovieAdapter(private val movie: List<Movie>) :
     RecyclerView.Adapter<MovieAdapter.MyViewHolder>() {
 
-    val movieList: List<Movie> = ArrayList(movie)
+    var movieList: List<Movie> = ArrayList(movie)
     var onItemClick: ((String, Int) -> Unit)? = null
     var tracker: SelectionTracker<String>? = null
 
