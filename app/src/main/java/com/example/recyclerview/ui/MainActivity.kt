@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), ActionMode.Callback {
         //initializing LayoutManager & Divider
         binding.recyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.recyclerView.addItemDecoration(DividerItemDecoration(this,RecyclerView.VERTICAL))
+        binding.recyclerView.addItemDecoration(DividerItemDecoration(this, RecyclerView.VERTICAL))
 
         //Creating a Custom adapter
         adapter = MovieAdapter(Supplier.Movies)
@@ -76,16 +76,36 @@ class MainActivity : AppCompatActivity(), ActionMode.Callback {
         }
     }
 
+    /**
+     * restore the instance of the tracker selection.
+     */
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        tracker.onRestoreInstanceState(savedInstanceState)
+        if (tracker.hasSelection()) {
+            actionMode = startSupportActionMode(this)
+            actionMode?.title = "${tracker.selection.size()} Selected"
+        }
+        super.onRestoreInstanceState(savedInstanceState)
+    }
+
+    /**
+     * saved the instance of the tracker selection
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        tracker.onSaveInstanceState(outState)
+        super.onSaveInstanceState(outState)
+    }
+
 
     override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-        mode?.menuInflater?.inflate(R.menu.menu_item,menu)
+        mode?.menuInflater?.inflate(R.menu.menu_item, menu)
         return true
     }
 
     override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean = true
 
     override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-        return when(item?.itemId){
+        return when (item?.itemId) {
             R.id.menu_delete -> {
                 //write the logic here to remove
                 val selected = adapter.movieList.filterNot {
