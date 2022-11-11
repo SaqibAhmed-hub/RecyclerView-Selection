@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
-import androidx.recyclerview.selection.OnDragInitiatedListener
 import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.R
-import com.example.recyclerview.Supplier
+import com.example.recyclerview.model.Supplier
 import com.example.recyclerview.adapter.ItemsDetailsLookup
 import com.example.recyclerview.adapter.ItemsKeyProvider
 import com.example.recyclerview.adapter.MovieAdapter
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity(), ActionMode.Callback {
         binding.recyclerView.addItemDecoration(DividerItemDecoration(this, RecyclerView.VERTICAL))
 
         //Creating a Custom adapter
-        adapter = MovieAdapter(Supplier.Movies)
+        adapter = MovieAdapter(Supplier.movies)
         binding.recyclerView.adapter = adapter
 
         //RecyclerView Multi Selection API

@@ -7,9 +7,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.selection.ItemDetailsLookup
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.RecyclerView
-import com.example.recyclerview.Movie
+import com.example.recyclerview.model.Movie
 import com.example.recyclerview.R
-import com.example.recyclerview.Supplier
 import com.example.recyclerview.databinding.AdapterLayoutBinding
 
 class MovieAdapter(private val movie: List<Movie>) :

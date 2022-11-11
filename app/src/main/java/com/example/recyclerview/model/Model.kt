@@ -1,9 +1,9 @@
-package com.example.recyclerview
+package com.example.recyclerview.model
 
-data class Movie(var title: String,var genre : String,var year: Int)
+data class Movie(val title: String,val genre : String,val year: Int)
 
 object Supplier{
-    val Movies  = listOf(
+    val movies  = listOf(
         Movie("Mad Max","Action and Adventure",2010),
         Movie("Fast and Furious","Action and Adventure",2007),
         Movie("Mentalist", "Thriller and Drama",2007),
